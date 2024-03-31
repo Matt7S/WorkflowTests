@@ -1,5 +1,5 @@
 import pytest
-from bakery import Cake
+from bakery.cake import Cake
 
 
 @pytest.fixture()
