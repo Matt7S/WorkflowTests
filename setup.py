@@ -7,5 +7,5 @@ setup (
     description='A useful module',
     author='MS',
     packages=['bakery'],
-    install_requires=['pickle', 'glob'],
+    install_requires=['pytest'],
 )
