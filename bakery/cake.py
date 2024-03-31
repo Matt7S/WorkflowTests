@@ -1,6 +1,6 @@
+from __future__ import annotations
 import pickle
 import glob
-
 
 
 class Cake:
