@@ -2,11 +2,10 @@ from setuptools import setup
 
 
 setup (
-    name='Bakery',
+    name='bakery',
     verion='1.0',
     description='A useful module',
     author='MS',
-    packages=['Bakery'],
+    packages=['bakery'],
     install_requires=['pickle', 'glob'],
-
 )
