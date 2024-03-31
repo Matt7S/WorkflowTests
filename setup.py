@@ -7,7 +7,5 @@ setup (
     description='A useful module',
     author='MS',
     packages=['bakery'],
-    install_requires=['numpy'],
-    setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
+    install_requires=['numpy']
 )
