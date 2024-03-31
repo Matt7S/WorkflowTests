@@ -1,6 +1,6 @@
+from __future__ import annotations
 import pickle
 import glob
-
 
 
 class Cake:
@@ -10,7 +10,7 @@ class Cake:
 
     def __init__(self, name, kind, taste, additives, filling, glutenFree, text):
         self.name = name
-        
+
         # if element is on the list with known kinds
         if kind in Cake.known_types:
             self.kind = kind
@@ -30,7 +30,6 @@ class Cake:
 
         Cake.number_of_cakes += 1
         self.bakery_offer.append(self)
-        
 
     def show_info(self):
         print("----- {} -----".format(self.name.upper()))
@@ -51,24 +50,24 @@ class Cake:
 
     def __iadd__(self, other):
         if type(other) is list:
-            for l in list:
-                if other not in self.additives:
+            for ele in other:
+                if ele not in self.additives:
                     self.additives.append(other)
             return self
-        
+
         if type(other) is str:
-                if other not in self.additives:
-                    self.additives.append(other)
-                return self
+            if other in self.additives:
+                self.additives.append(other)
+            return self
         else:
             raise Exception('Adding type {} to Cake is not implemented'.format(type(other)))
 
     @property
     def full_name(self):
         return "--== {} - {} ==--".format(self.name.upper(), self.kind)
-    
+
     def save_to_file(self, path):
-        with open(path,'bw') as f:
+        with open(path, 'bw') as f:
             pickle.dump(self, f)
 
     @classmethod
@@ -79,17 +78,17 @@ class Cake:
         cls.bakery_offer.append(new_cake)
         print(new_cake)
         return new_cake
-    
+
     @staticmethod
     def get_bakery_files(path):
         return glob.glob(path + '/*.bakery')
-    
+
 
 class NoDuplicates:
     def __init__(self, function):
         self.function = function
 
-    def __call__(self, cake:Cake, additives):
+    def __call__(self, cake: Cake, additives):
         no_duplicate_list = [a for a in additives if a not in cake.additives]
         # function call finds arguments for which it will be working
         self.function(cake, no_duplicate_list)
@@ -100,15 +99,13 @@ def add_extra_additives(cake: Cake, additives):
     cake.add_additives(additives)
 
 
-
 if __name__ == "__main__":
-    birthday_cake = Cake('Vanilla Cake','cake', 'vanilla', ['chocolate', 'nuts'], 'cream', 'free', 'loveYou')
+    birthday_cake = Cake('Vanilla Cake', 'cake', 'vanilla', ['chocolate', 'nuts'], 'cream', 'free', 'loveYou')
     birthday_cake += 'milk'
     birthday_cake += 'milk'
     add_extra_additives(birthday_cake, ['chocolate', 'apple'])
 
     birthday_cake.show_info()
 
-    #birthday_cake.save_to_file('./birthday_cake.bakery')
-    #print(Cake.get_bakery_files('./'))
-    
+#birthday_cake.save_to_file('./birthday_cake.bakery')
+#print(Cake.get_bakery_files('./'))
